@@ -1,0 +1,70 @@
+from datetime import date, datetime
+from typing import Optional, List
+from pydantic import BaseModel
+
+from app.schemas.media import MediaResponse
+
+
+class FamilyMemberPhotoResponse(BaseModel):
+    id: int
+    media_id: int
+    file_url: str
+    caption: Optional[str] = None
+    sort_order: int = 0
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class FamilyMemberResponse(BaseModel):
+    id: int
+    name: str
+    relation: str
+    avatar: Optional[MediaResponse] = None
+    bio_summary: Optional[str] = None
+    photo_count: int = 0
+    sort_order: int = 0
+
+    class Config:
+        from_attributes = True
+
+
+class FamilyMemberDetailResponse(BaseModel):
+    id: int
+    name: str
+    relation: str
+    avatar: Optional[MediaResponse] = None
+    bio: Optional[str] = None
+    bio_html: Optional[str] = None
+    birth_date: Optional[date] = None
+    hobbies: Optional[List[str]] = None
+    photos: List[FamilyMemberPhotoResponse] = []
+    view_count: int = 0
+    sort_order: int = 0
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class FamilyMemberCreate(BaseModel):
+    name: str
+    relation: str
+    avatar_media_id: Optional[int] = None
+    bio: Optional[str] = None
+    birth_date: Optional[date] = None
+    hobbies: Optional[List[str]] = None
+    sort_order: int = 0
+    is_public: bool = True
+
+
+class FamilyMemberUpdate(BaseModel):
+    name: Optional[str] = None
+    relation: Optional[str] = None
+    avatar_media_id: Optional[int] = None
+    bio: Optional[str] = None
+    birth_date: Optional[date] = None
+    hobbies: Optional[List[str]] = None
+    sort_order: Optional[int] = None
+    is_public: Optional[bool] = None

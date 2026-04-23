@@ -1,0 +1,15 @@
+fastapi==0.110.0
+uvicorn[standard]==0.27.1
+gunicorn==21.2.0
+sqlalchemy[asyncio]==2.0.27
+aiomysql==0.2.0
+redis==5.0.1
+python-jose[cryptography]==3.3.0
+bcrypt==3.2.2
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.9
+Pillow==10.2.0
+python-dotenv==1.0.1
+pydantic==2.6.1
+pydantic-settings==2.1.0
+email-validator==2.1.0
