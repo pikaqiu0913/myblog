@@ -17,7 +17,16 @@ apiClient.interceptors.request.use((config) => {
   // 反爬虫请求头
   const timestamp = Math.floor(Date.now() / 1000)
   config.headers['X-Request-Time'] = timestamp
-  config.headers['X-Request-ID'] = crypto.randomUUID()
+  config.headers['X-Request-ID'] = (() => {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+      return crypto.randomUUID()
+    }
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+      const r = (Math.random() * 16) | 0
+      const v = c === 'x' ? r : (r & 0x3) | 0x8
+      return v.toString(16)
+    })
+  })()
 
   return config
 })
